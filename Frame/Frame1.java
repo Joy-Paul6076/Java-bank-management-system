@@ -8,13 +8,12 @@ import java.awt.event.*; //package for Interfaces
 public class Frame1 extends JFrame implements ActionListener // , MouseListener
 {
     private JLabel label1;
-    private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin, exitBtn;
+    private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin, exitBtn, backFromSearch, searchBtn, deleteBtn, backFromDelete, balanceBtn, transferBtn, withdrawBtn, addBalanceBtn, logoutBtn, loginBtn, withdrawConfirmBtn, transferConfirmBtn, addBalanceConfirmBtn, backFromWithdraw, backFromTransfer, backFromAddBalance;
     private Font f1,f2;
     private Color c1,c2;
-    private JPanel mainPanel, createPanel, loginPanel;
-    private CardLayout cardLayout;
-    private JTextField tf1, tf2, tf3, tf4, tf5, tf7;
-    private JPasswordField pf1;
+    private JPanel mainPanel, createPanel, loginPanel, searchpanel, deletePanel, accountPanel, withdrawPanel, transferPanel, addBalancePanel;
+    private JTextField tf1, tf2, tf3, tf4, tf5, tf7, searchTf, deleteTf, withdrawTf, transferRecipientTf, transferAmountTf, addBalanceTf;
+    private JPasswordField pf1, deletePf;
     private JLabel l1,l2,l3,l4,l5,l6;
     public Frame1()
     {
@@ -23,8 +22,8 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setLocationRelativeTo(null); 
         super.setResizable(false);
-        cardLayout = new CardLayout();
-        this.setLayout(cardLayout);
+        this.setLayout(null);
+        
         
         f1 = new Font("Arial", Font.BOLD, 48);
 		f2 = new Font("Arial", Font.BOLD, 24); 
@@ -33,6 +32,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         // Main Panel
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
+        mainPanel.setBounds(0,0,900,1250);
         mainPanel.setBackground(new Color(20, 30, 48));
         ImageIcon image1 = new ImageIcon("logo.png");
         this.setIconImage(image1.getImage());
@@ -89,11 +89,12 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         bt6.setBackground(c1);
         mainPanel.add(bt6);
 
-        this.add(mainPanel, "main");
+        this.add(mainPanel);
         
         // Create create account  Panel
         createPanel = new JPanel();
         createPanel.setLayout(null);
+        createPanel.setBounds(0,0,900,1250);
         createPanel.setBackground(new Color(20, 30, 48));
         ImageIcon image2 = new ImageIcon("logo.png");
         this.setIconImage(image2.getImage());
@@ -116,7 +117,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         exitBtn.addActionListener(this);
         exitBtn.setBounds(570, 850, 200, 50);
         createPanel.add(exitBtn);        
-        this.add(createPanel, "create");
+        this.add(createPanel);
 
         l1= new JLabel("Name:");
         l1.setFont(f2);
@@ -246,6 +247,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         // Login Panel
         loginPanel = new JPanel();
         loginPanel.setLayout(null);
+        loginPanel.setBounds(0,0,900,1250);
         loginPanel.setBackground(new Color(20, 30, 48));
 
         JLabel loginLabel = new JLabel("Log In");
@@ -276,7 +278,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         passPf.setBounds(350, 250, 300, 40);
         loginPanel.add(passPf);
 
-        JButton loginBtn = new JButton("Log In");
+        loginBtn = new JButton("Log In");
         loginBtn.addActionListener(this);
         loginBtn.setBounds(350, 350, 200, 50);
         loginPanel.add(loginBtn);
@@ -286,9 +288,263 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         backToMainFromLogin.setBounds(350, 450, 200, 50);
         loginPanel.add(backToMainFromLogin);
 
-        this.add(loginPanel, "login");
+        this.add(loginPanel);
 
-        cardLayout.show(this, "main");
+        // Search Panel
+        searchpanel = new JPanel();
+        searchpanel.setLayout(null);
+        searchpanel.setBounds(0,0,900,1250);
+        searchpanel.setBackground(new Color(20, 30, 48));
+
+        JLabel searchLabel = new JLabel("Search Account");
+        searchLabel.setFont(f2);
+        searchLabel.setForeground(Color.WHITE);
+        searchLabel.setBounds(350, 50, 200, 50);
+        searchpanel.add(searchLabel);
+
+        JLabel searchUserLabel = new JLabel("Username:");
+        searchUserLabel.setFont(f2);
+        searchUserLabel.setForeground(Color.WHITE);
+        searchUserLabel.setBounds(200, 150, 150, 40);
+        searchpanel.add(searchUserLabel);
+
+        JTextField searchTf = new JTextField();
+        searchTf.setFont(f2);
+        searchTf.setBounds(350, 150, 300, 40);
+        searchpanel.add(searchTf);
+
+        JButton searchBtn = new JButton("Search");
+        searchBtn.addActionListener(this);
+        searchBtn.setBounds(350, 250, 200, 50);
+        searchpanel.add(searchBtn);
+
+        JButton backFromSearch = new JButton("Back to Main");
+        backFromSearch.addActionListener(this);
+        backFromSearch.setBounds(350, 350, 200, 50);
+        searchpanel.add(backFromSearch);
+
+        this.add(searchpanel);
+
+        // Delete Panel
+        deletePanel = new JPanel();
+        deletePanel.setLayout(null);
+        deletePanel.setBounds(0,0,900,1250);
+        deletePanel.setBackground(new Color(20, 30, 48));
+
+        JLabel deleteLabel = new JLabel("Delete Account");
+        deleteLabel.setFont(f2);
+        deleteLabel.setForeground(Color.WHITE);
+        deleteLabel.setBounds(350, 50, 200, 50);
+        deletePanel.add(deleteLabel);
+
+        JLabel deleteUserLabel = new JLabel("Username:");
+        deleteUserLabel.setFont(f2);
+        deleteUserLabel.setForeground(Color.WHITE);
+        deleteUserLabel.setBounds(200, 150, 150, 40);
+        deletePanel.add(deleteUserLabel);
+
+        deleteTf = new JTextField();
+        deleteTf.setFont(f2);
+        deleteTf.setBounds(350, 150, 300, 40);
+        deletePanel.add(deleteTf);
+
+        JLabel deletePassLabel = new JLabel("Password:");
+        deletePassLabel.setFont(f2);
+        deletePassLabel.setForeground(Color.WHITE);
+        deletePassLabel.setBounds(200, 250, 150, 40);
+        deletePanel.add(deletePassLabel);
+
+        deletePf = new JPasswordField();
+        deletePf.setFont(f2);
+        deletePf.setBounds(350, 250, 300, 40);
+        deletePanel.add(deletePf);
+
+        deleteBtn = new JButton("Delete Account");
+        deleteBtn.addActionListener(this);
+        deleteBtn.setBounds(350, 350, 200, 50);
+        deletePanel.add(deleteBtn);
+
+        backFromDelete = new JButton("Back to Main");
+        backFromDelete.addActionListener(this);
+        backFromDelete.setBounds(350, 450, 200, 50);
+        deletePanel.add(backFromDelete);
+
+        this.add(deletePanel);
+
+        // Account Panel
+        accountPanel = new JPanel();
+        accountPanel.setLayout(null);
+        accountPanel.setBounds(0,0,900,1250);
+        accountPanel.setBackground(new Color(20, 30, 48));
+
+        JLabel accountLabel = new JLabel("Account Options");
+        accountLabel.setFont(f2);
+        accountLabel.setForeground(Color.WHITE);
+        accountLabel.setBounds(350, 50, 200, 50);
+        accountPanel.add(accountLabel);
+
+        balanceBtn = new JButton("Show Balance");
+        balanceBtn.addActionListener(this);
+        balanceBtn.setBounds(200, 150, 500, 100);
+        balanceBtn.setFont(f1);
+        balanceBtn.setBackground(c1);
+        accountPanel.add(balanceBtn);
+
+        transferBtn = new JButton("Transfer");
+        transferBtn.addActionListener(this);
+        transferBtn.setBounds(200, 280, 500, 100);
+        transferBtn.setFont(f1);
+        transferBtn.setBackground(c1);
+        accountPanel.add(transferBtn);
+
+        withdrawBtn = new JButton("Withdraw");
+        withdrawBtn.addActionListener(this);
+        withdrawBtn.setBounds(200, 410, 500, 100);
+        withdrawBtn.setFont(f1);
+        withdrawBtn.setBackground(c1);
+        accountPanel.add(withdrawBtn);
+
+        addBalanceBtn = new JButton("Add Balance");
+        addBalanceBtn.addActionListener(this);
+        addBalanceBtn.setBounds(200, 540, 500, 100);
+        addBalanceBtn.setFont(f1);
+        addBalanceBtn.setBackground(c1);
+        accountPanel.add(addBalanceBtn);
+
+        logoutBtn = new JButton("Logout");
+        logoutBtn.addActionListener(this);
+        logoutBtn.setBounds(200, 670, 500, 100);
+        logoutBtn.setFont(f1);
+        logoutBtn.setBackground(c1);
+        accountPanel.add(logoutBtn);
+
+        this.add(accountPanel);
+
+        // Withdraw Panel
+        withdrawPanel = new JPanel();
+        withdrawPanel.setLayout(null);
+        withdrawPanel.setBounds(0,0,900,1250);
+        withdrawPanel.setBackground(new Color(20, 30, 48));
+
+        JLabel withdrawLabel = new JLabel("Withdraw Money");
+        withdrawLabel.setFont(f2);
+        withdrawLabel.setForeground(Color.WHITE);
+        withdrawLabel.setBounds(350, 50, 200, 50);
+        withdrawPanel.add(withdrawLabel);
+
+        JLabel withdrawAmountLabel = new JLabel("Amount:");
+        withdrawAmountLabel.setFont(f2);
+        withdrawAmountLabel.setForeground(Color.WHITE);
+        withdrawAmountLabel.setBounds(200, 150, 150, 40);
+        withdrawPanel.add(withdrawAmountLabel);
+
+        withdrawTf = new JTextField();
+        withdrawTf.setFont(f2);
+        withdrawTf.setBounds(350, 150, 300, 40);
+        withdrawPanel.add(withdrawTf);
+
+        withdrawConfirmBtn = new JButton("Withdraw");
+        withdrawConfirmBtn.addActionListener(this);
+        withdrawConfirmBtn.setBounds(350, 250, 200, 50);
+        withdrawPanel.add(withdrawConfirmBtn);
+
+        backFromWithdraw = new JButton("Back to Account");
+        backFromWithdraw.addActionListener(this);
+        backFromWithdraw.setBounds(350, 350, 200, 50);
+        withdrawPanel.add(backFromWithdraw);
+
+        this.add(withdrawPanel);
+
+        // Transfer Panel
+        transferPanel = new JPanel();
+        transferPanel.setLayout(null);
+        transferPanel.setBounds(0,0,900,1250);
+        transferPanel.setBackground(new Color(20, 30, 48));
+
+        JLabel transferLabel = new JLabel("Transfer Money");
+        transferLabel.setFont(f2);
+        transferLabel.setForeground(Color.WHITE);
+        transferLabel.setBounds(350, 50, 200, 50);
+        transferPanel.add(transferLabel);
+
+        JLabel transferRecipientLabel = new JLabel("Recipient:");
+        transferRecipientLabel.setFont(f2);
+        transferRecipientLabel.setForeground(Color.WHITE);
+        transferRecipientLabel.setBounds(200, 150, 150, 40);
+        transferPanel.add(transferRecipientLabel);
+
+        transferRecipientTf = new JTextField();
+        transferRecipientTf.setFont(f2);
+        transferRecipientTf.setBounds(350, 150, 300, 40);
+        transferPanel.add(transferRecipientTf);
+
+        JLabel transferAmountLabel = new JLabel("Amount:");
+        transferAmountLabel.setFont(f2);
+        transferAmountLabel.setForeground(Color.WHITE);
+        transferAmountLabel.setBounds(200, 250, 150, 40);
+        transferPanel.add(transferAmountLabel);
+
+        transferAmountTf = new JTextField();
+        transferAmountTf.setFont(f2);
+        transferAmountTf.setBounds(350, 250, 300, 40);
+        transferPanel.add(transferAmountTf);
+
+        transferConfirmBtn = new JButton("Transfer");
+        transferConfirmBtn.addActionListener(this);
+        transferConfirmBtn.setBounds(350, 350, 200, 50);
+        transferPanel.add(transferConfirmBtn);
+
+        backFromTransfer = new JButton("Back to Account");
+        backFromTransfer.addActionListener(this);
+        backFromTransfer.setBounds(350, 450, 200, 50);
+        transferPanel.add(backFromTransfer);
+
+        this.add(transferPanel);
+
+        // Add Balance Panel
+        addBalancePanel = new JPanel();
+        addBalancePanel.setLayout(null);
+        addBalancePanel.setBounds(0,0,900,1250);
+        addBalancePanel.setBackground(new Color(20, 30, 48));
+
+        JLabel addBalanceLabel = new JLabel("Add Balance");
+        addBalanceLabel.setFont(f2);
+        addBalanceLabel.setForeground(Color.WHITE);
+        addBalanceLabel.setBounds(350, 50, 200, 50);
+        addBalancePanel.add(addBalanceLabel);
+
+        JLabel addAmountLabel = new JLabel("Amount:");
+        addAmountLabel.setFont(f2);
+        addAmountLabel.setForeground(Color.WHITE);
+        addAmountLabel.setBounds(200, 150, 150, 40);
+        addBalancePanel.add(addAmountLabel);
+
+        addBalanceTf = new JTextField();
+        addBalanceTf.setFont(f2);
+        addBalanceTf.setBounds(350, 150, 300, 40);
+        addBalancePanel.add(addBalanceTf);
+
+        addBalanceConfirmBtn = new JButton("Add Balance");
+        addBalanceConfirmBtn.addActionListener(this);
+        addBalanceConfirmBtn.setBounds(350, 250, 200, 50);
+        addBalancePanel.add(addBalanceConfirmBtn);
+
+        backFromAddBalance = new JButton("Back to Account");
+        backFromAddBalance.addActionListener(this);
+        backFromAddBalance.setBounds(350, 350, 200, 50);
+        addBalancePanel.add(backFromAddBalance);
+
+        this.add(addBalancePanel);
+
+        mainPanel.setVisible(true);
+        createPanel.setVisible(false);
+        loginPanel.setVisible(false);
+        searchpanel.setVisible(false);
+        deletePanel.setVisible(false);
+        accountPanel.setVisible(false);
+        withdrawPanel.setVisible(false);
+        transferPanel.setVisible(false);
+        addBalancePanel.setVisible(false);
     }
     
     public void actionPerformed(ActionEvent e)
@@ -297,29 +553,233 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         {
             mainPanel.setVisible(false);
             createPanel.setVisible(true);
-        }
+            loginPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            accountPanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+             }
         if(e.getSource() == bt2)
         {
            mainPanel.setVisible(false);
            createPanel.setVisible(false);
-              loginPanel.setVisible(true);
+           loginPanel.setVisible(true);
+           searchpanel.setVisible(false);
+           deletePanel.setVisible(false);
+           accountPanel.setVisible(false);
+           withdrawPanel.setVisible(false);
+           transferPanel.setVisible(false);
+           addBalancePanel.setVisible(false);
         }
         if(e.getSource() == backBtn)
         {
             createPanel.setVisible(false);
             loginPanel.setVisible(false);
             mainPanel.setVisible(true);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            accountPanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+            JOptionPane.showMessageDialog(backBtn, "Account Created Successfully!");
+       
         }
         if(e.getSource() == exitBtn)
         {
             mainPanel.setVisible(true);
             loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
         }
         if(e.getSource() == backToMainFromLogin)
         {
             mainPanel.setVisible(true);
             loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            accountPanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
         }
+        if(e.getSource() == loginBtn)
+        {
+            mainPanel.setVisible(false);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            accountPanel.setVisible(true);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+        }
+        if(e.getSource() == bt3)
+        {
+            mainPanel.setVisible(false);
+            searchpanel.setVisible(true);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            deletePanel.setVisible(false);
+            accountPanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+
+        }
+        if(e.getSource() == backFromSearch)
+        {
+            mainPanel.setVisible(true);
+            searchpanel.setVisible(false);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            deletePanel.setVisible(false);
+
+
+        }
+        if(e.getSource() == searchBtn)
+        {
+            String username = searchTf.getText();
+            JOptionPane.showMessageDialog(this, "Searching for account: " + username);
+        }
+        if(e.getSource() == bt4)
+        {
+            mainPanel.setVisible(false);
+            deletePanel.setVisible(true);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            accountPanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+        }
+        if(e.getSource() == backFromDelete)
+        {
+            mainPanel.setVisible(true);
+            deletePanel.setVisible(false);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            accountPanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+        }
+        if(e.getSource() == balanceBtn)
+        {
+            JOptionPane.showMessageDialog(this, "Current Balance: $1000");
+        }
+        if(e.getSource() == transferBtn)
+        {
+            mainPanel.setVisible(false);
+            accountPanel.setVisible(false);
+            transferPanel.setVisible(true);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+        }
+        if(e.getSource() == withdrawBtn)
+        {
+            mainPanel.setVisible(false);
+            accountPanel.setVisible(false);
+            withdrawPanel.setVisible(true);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+        }
+        if(e.getSource() == addBalanceBtn)
+        {
+            mainPanel.setVisible(false);
+            accountPanel.setVisible(false);
+            addBalancePanel.setVisible(true);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+        }
+        if(e.getSource() == logoutBtn)
+        {
+            mainPanel.setVisible(true);
+            accountPanel.setVisible(false);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+        }
+        if(e.getSource() == bt6)
+        {
+            System.exit(0);
+        }
+        if(e.getSource() == withdrawConfirmBtn)
+        {
+            String amount = withdrawTf.getText();
+            JOptionPane.showMessageDialog(this, "Withdrawn: $" + amount);
+        }
+        if(e.getSource() == transferConfirmBtn)
+        {
+            String recipient = transferRecipientTf.getText();
+            String amount = transferAmountTf.getText();
+            JOptionPane.showMessageDialog(this, "Transferred $" + amount + " to " + recipient);
+        }
+        if(e.getSource() == addBalanceConfirmBtn)
+        {
+            String amount = addBalanceTf.getText();
+            JOptionPane.showMessageDialog(this, "Added $" + amount + " to balance");
+        }
+        if(e.getSource() == backFromWithdraw)
+        {
+            accountPanel.setVisible(true);
+            withdrawPanel.setVisible(false);
+            mainPanel.setVisible(false);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+        }
+        if(e.getSource() == backFromTransfer)
+        {
+            accountPanel.setVisible(true);
+            transferPanel.setVisible(false);
+            mainPanel.setVisible(false);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
+        }
+        if(e.getSource() == backFromAddBalance)
+        {
+            accountPanel.setVisible(true);
+            addBalancePanel.setVisible(false);
+            mainPanel.setVisible(false);
+            loginPanel.setVisible(false);
+            createPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+        }
+
     }
     
     public static void main(String[] args)
