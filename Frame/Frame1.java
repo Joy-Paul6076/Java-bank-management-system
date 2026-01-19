@@ -8,10 +8,10 @@ import java.awt.event.*; //package for Interfaces
 public class Frame1 extends JFrame implements ActionListener // , MouseListener
 {
     private JLabel label1;
-    private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn;
+    private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin;
     private Font f1,f2;
     private Color c1,c2;
-    private JPanel mainPanel, createPanel;
+    private JPanel mainPanel, createPanel, loginPanel;
     private CardLayout cardLayout;
     private JTextField tf1, tf2, tf3, tf4, tf5, tf7;
     private JPasswordField pf1;
@@ -213,16 +213,70 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
 
 
 
-        //mainPanel.setVisible(false);
-        //createPanel.setVisible(true);
+        // Login Panel
+        loginPanel = new JPanel();
+        loginPanel.setLayout(null);
+        loginPanel.setBackground(new Color(20, 30, 48));
+
+        JLabel loginLabel = new JLabel("Log In");
+        loginLabel.setFont(f2);
+        loginLabel.setForeground(Color.WHITE);
+        loginLabel.setBounds(350, 50, 200, 50);
+        loginPanel.add(loginLabel);
+
+        JLabel userLabel = new JLabel("Username:");
+        userLabel.setFont(f2);
+        userLabel.setForeground(Color.WHITE);
+        userLabel.setBounds(200, 150, 150, 40);
+        loginPanel.add(userLabel);
+
+        JTextField userTf = new JTextField();
+        userTf.setFont(f2);
+        userTf.setBounds(350, 150, 300, 40);
+        loginPanel.add(userTf);
+
+        JLabel passLabel = new JLabel("Password:");
+        passLabel.setFont(f2);
+        passLabel.setForeground(Color.WHITE);
+        passLabel.setBounds(200, 250, 150, 40);
+        loginPanel.add(passLabel);
+
+        JPasswordField passPf = new JPasswordField();
+        passPf.setFont(f2);
+        passPf.setBounds(350, 250, 300, 40);
+        loginPanel.add(passPf);
+
+        JButton loginBtn = new JButton("Log In");
+        loginBtn.addActionListener(this);
+        loginBtn.setBounds(350, 350, 200, 50);
+        loginPanel.add(loginBtn);
+
+        backToMainFromLogin = new JButton("Back to Main");
+        backToMainFromLogin.addActionListener(this);
+        backToMainFromLogin.setBounds(350, 450, 200, 50);
+        loginPanel.add(backToMainFromLogin);
+
+        this.add(loginPanel, "login");
+
+        cardLayout.show(this, "main");
     }
     
     public void actionPerformed(ActionEvent e)
     {
         if(e.getSource() == button1)
         {
-          mainPanel.setVisible(false);
+            mainPanel.setVisible(false);
             createPanel.setVisible(true);
+        }
+        if(e.getSource() == backBtn)
+        {
+            mainPanel.setVisible(true);
+            createPanel.setVisible(false);
+        }
+        if(e.getSource() == bt2)
+        {
+            mainPanel.setVisible(false);
+            loginPanel.setVisible(true);
         }
     }
     
