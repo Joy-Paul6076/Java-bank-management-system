@@ -13,9 +13,9 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
     private Color c1,c2;
     private JPanel mainPanel, createPanel;
     private CardLayout cardLayout;
-    private JTextField tf1, tf2, tf3, tf4;
+    private JTextField tf1, tf2, tf3, tf4, tf5, tf7;
     private JPasswordField pf1;
-    private JLabel l1,l2,l3,l4,l5;
+    private JLabel l1,l2,l3,l4,l5,l6;
     public Frame1()
     {
         super("ABC Bank Management System");
@@ -27,7 +27,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         this.setLayout(cardLayout);
         
         f1 = new Font("Arial", Font.BOLD, 48);
-		f2 = new Font("Arial", Font.BOLD, 20); 
+		f2 = new Font("Arial", Font.BOLD, 24); 
         c1 = new Color(255, 193, 7);
 		c2 = new Color(20, 30, 48);
         // Main Panel
@@ -101,40 +101,120 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         
         JLabel createLabel = new JLabel("Creating An Account");
         createLabel.setFont(f2);
-        createLabel.setBounds(340, 10, 400, 50);
+        createLabel.setForeground(Color.BLACK);
+        createLabel.setOpaque(true);
+        createLabel.setBackground(Color.LIGHT_GRAY);
+        createLabel.setHorizontalAlignment(JLabel.CENTER);
+        createLabel.setBounds(275, 10, 350, 50);
         createPanel.add(createLabel);
         
-        JButton backBtn = new JButton("Back to Main");
+        JButton backBtn = new JButton("Create Account");
         backBtn.addActionListener(this);
-        backBtn.setBounds(350, 1100, 200, 50);
+        backBtn.setBounds(350, 750, 200, 50);
         createPanel.add(backBtn);
         
         this.add(createPanel, "create");
 
         l1= new JLabel("Name:");
         l1.setFont(f2);
-        l1.setForeground(Color.WHITE);
-        l1.setBounds(100,100,200,30);
+        l1.setForeground(Color.BLACK);
+        l1.setOpaque(true);
+        l1.setBackground(Color.LIGHT_GRAY);
+        l1.setBounds(165,100,150,40);
         createPanel.add(l1);
 
 
         tf1= new JTextField();
         tf1.setFont(f2);
-        tf1.setBounds(300,100,400,30);
+        tf1.setBounds(335,100,400,40);
         createPanel.add(tf1);
 
-        
-        
+        l2= new JLabel("Address:");
+        l2.setFont(f2);
+        l2.setForeground(Color.BLACK);
+        l2.setOpaque(true);
+        l2.setBackground(Color.LIGHT_GRAY);
+        l2.setBounds(165,180,150,40);
+        createPanel.add(l2);
+
+        tf2= new JTextField();
+        tf2.setFont(f2);
+        tf2.setBounds(335,180,400,40);
+        createPanel.add(tf2);
+
+
+        l3= new JLabel("Phone:");
+        l3.setFont(f2);
+        l3.setForeground(Color.BLACK);
+        l3.setOpaque(true);
+        l3.setBackground(Color.LIGHT_GRAY);
+        l3.setBounds(165,260,150,40);   
+        createPanel.add(l3);
+
+        tf3= new JTextField();
+        tf3.setFont(f2);
+        tf3.setBounds(335,260,400,40);
+        createPanel.add(tf3);
+
+        l4= new JLabel("Email:");
+        l4.setFont(f2); 
+        l4.setForeground(Color.BLACK);
+        l4.setOpaque(true);
+        l4.setBackground(Color.LIGHT_GRAY);
+        l4.setBounds(165,340,150,40);
+        createPanel.add(l4);
+
+        tf4= new JTextField();
+        tf4.setFont(f2);
+        tf4.setBounds(335,340,400,40);
+        createPanel.add(tf4);
+
+
+        l5= new JLabel("Username:");
+        l5.setFont(f2);
+        l5.setForeground(Color.BLACK);
+        l5.setOpaque(true);
+        l5.setBackground(Color.LIGHT_GRAY);
+        l5.setBounds(165,420,150,40);
+        createPanel.add(l5);
+
+        tf5= new JTextField();
+        tf5.setFont(f2);
+        tf5.setBounds(335,420,400,40);
+        createPanel.add(tf5);
+
         this.setVisible(true);
 
+        l6= new JLabel("Password:");
+        l6.setFont(f2);
+        l6.setForeground(Color.BLACK);
+        l6.setOpaque(true);
+        l6.setBackground(Color.LIGHT_GRAY);
+        l6.setBounds(165,500,150,40);
+        createPanel.add(l6);
+
+        pf1= new JPasswordField();
+        pf1.setFont(f2);
+        pf1.setBounds(335,500,400,40);
+        createPanel.add(pf1);
+
+        JLabel l7 = new JLabel("Description:");
+        l7.setFont(f2);
+        l7.setForeground(Color.BLACK);
+        l7.setOpaque(true);
+        l7.setBackground(Color.LIGHT_GRAY);
+        l7.setBounds(165,580,150,40);
+        createPanel.add(l7);
+
+        tf7= new JTextField();
+        tf7.setFont(f2);
+        tf7.setBounds(335,580,400,150);
+        createPanel.add(tf7);
 
 
 
-
-
-
-        mainPanel.setVisible(false);
-        createPanel.setVisible(true);
+        //mainPanel.setVisible(false);
+        //createPanel.setVisible(true);
     }
     
     public void actionPerformed(ActionEvent e)
