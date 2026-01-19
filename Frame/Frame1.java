@@ -10,7 +10,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
     private JLabel label1;
     private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin, exitBtn, backFromSearch, searchBtn, deleteBtn, backFromDelete, balanceBtn, transferBtn, withdrawBtn, addBalanceBtn, logoutBtn, loginBtn, withdrawConfirmBtn, transferConfirmBtn, addBalanceConfirmBtn, backFromWithdraw, backFromTransfer, backFromAddBalance;
     private Font f1,f2;
-    private Color c1,c2;
+    private Color c1;
     private JPanel mainPanel, createPanel, loginPanel, searchpanel, deletePanel, accountPanel, withdrawPanel, transferPanel, addBalancePanel;
     private JTextField tf1, tf2, tf3, tf4, tf5, tf7, searchTf, deleteTf, withdrawTf, transferRecipientTf, transferAmountTf, addBalanceTf;
     private JPasswordField pf1, deletePf;
@@ -28,7 +28,6 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         f1 = new Font("Arial", Font.BOLD, 48);
 		f2 = new Font("Arial", Font.BOLD, 24); 
         c1 = new Color(255, 193, 7);
-		c2 = new Color(20, 30, 48);
         // Main Panel
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
@@ -545,6 +544,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         withdrawPanel.setVisible(false);
         transferPanel.setVisible(false);
         addBalancePanel.setVisible(false);
+
     }
     
     public void actionPerformed(ActionEvent e)
