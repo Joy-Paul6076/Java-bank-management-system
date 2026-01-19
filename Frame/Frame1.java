@@ -8,7 +8,7 @@ import java.awt.event.*; //package for Interfaces
 public class Frame1 extends JFrame implements ActionListener // , MouseListener
 {
     private JLabel label1;
-    private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin;
+    private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin, exitBtn;
     private Font f1,f2;
     private Color c1,c2;
     private JPanel mainPanel, createPanel, loginPanel;
@@ -110,9 +110,12 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         
         JButton backBtn = new JButton("Create Account");
         backBtn.addActionListener(this);
-        backBtn.setBounds(350, 750, 200, 50);
-        createPanel.add(backBtn);
-        
+        backBtn.setBounds(350, 850, 200, 50);
+        createPanel.add(backBtn);        
+        exitBtn = new JButton("Exit");
+        exitBtn.addActionListener(this);
+        exitBtn.setBounds(570, 850, 200, 50);
+        createPanel.add(exitBtn);        
         this.add(createPanel, "create");
 
         l1= new JLabel("Name:");
@@ -198,17 +201,44 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         pf1.setBounds(335,500,400,40);
         createPanel.add(pf1);
 
+        JLabel accountTypeLabel = new JLabel("Account Type:");
+        accountTypeLabel.setFont(f2);
+        accountTypeLabel.setForeground(Color.BLACK);
+        accountTypeLabel.setOpaque(true);
+        accountTypeLabel.setBackground(Color.LIGHT_GRAY);
+        accountTypeLabel.setBounds(165,580,150,40);
+        createPanel.add(accountTypeLabel);
+
+        JRadioButton savingsRadio = new JRadioButton("Savings");
+        savingsRadio.setFont(f2);
+        savingsRadio.setForeground(Color.BLACK);
+        savingsRadio.setBackground(Color.LIGHT_GRAY);
+        savingsRadio.setBounds(335,580,150,40);
+        savingsRadio.setSelected(true);
+        createPanel.add(savingsRadio);
+
+        JRadioButton currentRadio = new JRadioButton("Current");
+        currentRadio.setFont(f2);
+        currentRadio.setForeground(Color.BLACK);
+        currentRadio.setBackground(Color.LIGHT_GRAY);
+        currentRadio.setBounds(500,580,150,40);
+        createPanel.add(currentRadio);
+
+        ButtonGroup accountTypeGroup = new ButtonGroup();
+        accountTypeGroup.add(savingsRadio);
+        accountTypeGroup.add(currentRadio);
+
         JLabel l7 = new JLabel("Description:");
         l7.setFont(f2);
         l7.setForeground(Color.BLACK);
         l7.setOpaque(true);
         l7.setBackground(Color.LIGHT_GRAY);
-        l7.setBounds(165,580,150,40);
+        l7.setBounds(165,660,150,40);
         createPanel.add(l7);
 
         tf7= new JTextField();
         tf7.setFont(f2);
-        tf7.setBounds(335,580,400,150);
+        tf7.setBounds(335,660,400,150);
         createPanel.add(tf7);
 
 
@@ -268,15 +298,27 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             mainPanel.setVisible(false);
             createPanel.setVisible(true);
         }
-        if(e.getSource() == backBtn)
-        {
-            mainPanel.setVisible(true);
-            createPanel.setVisible(false);
-        }
         if(e.getSource() == bt2)
         {
-            mainPanel.setVisible(false);
-            loginPanel.setVisible(true);
+           mainPanel.setVisible(false);
+           createPanel.setVisible(false);
+              loginPanel.setVisible(true);
+        }
+        if(e.getSource() == backBtn)
+        {
+            createPanel.setVisible(false);
+            loginPanel.setVisible(false);
+            mainPanel.setVisible(true);
+        }
+        if(e.getSource() == exitBtn)
+        {
+            mainPanel.setVisible(true);
+            loginPanel.setVisible(false);
+        }
+        if(e.getSource() == backToMainFromLogin)
+        {
+            mainPanel.setVisible(true);
+            loginPanel.setVisible(false);
         }
     }
     
