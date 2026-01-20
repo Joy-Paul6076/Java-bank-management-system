@@ -1,20 +1,23 @@
-
-//import java.lang.*;
+package Frame;
+//Create Account Name Address Savings Description Password // Create Account
 import javax.swing.*; //package for GUI components
 import java.awt.*; //package for Font and Color
 import java.awt.event.*; //package for Interfaces
-//import java.io.*; //for File IO
-
+import java.io.*; //for File IO
+import Entity.Account; //import Account class from Entity package
 public class Frame1 extends JFrame implements ActionListener // , MouseListener
 {
     private JLabel label1;
-    private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin, exitBtn, backFromSearch, searchBtn, deleteBtn, backFromDelete, balanceBtn, transferBtn, withdrawBtn, addBalanceBtn, logoutBtn, loginBtn, withdrawConfirmBtn, transferConfirmBtn, addBalanceConfirmBtn, backFromWithdraw, backFromTransfer, backFromAddBalance;
+    private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin, exitBtn, backFromSearch, searchBtn, deleteBtn, backFromDelete, balanceBtn, transferBtn, withdrawBtn, addBalanceBtn, logoutBtn, loginBtn, withdrawConfirmBtn, transferConfirmBtn, addBalanceConfirmBtn, backFromWithdraw, backFromTransfer, backFromAddBalance, backFromShowAll;
     private Font f1,f2;
     private Color c1;
-    private JPanel mainPanel, createPanel, loginPanel, searchpanel, deletePanel, accountPanel, withdrawPanel, transferPanel, addBalancePanel;
-    private JTextField tf1, tf2, tf3, tf4, tf5, tf7, searchTf, deleteTf, withdrawTf, transferRecipientTf, transferAmountTf, addBalanceTf;
-    private JPasswordField pf1, deletePf;
+    private JPanel mainPanel, createPanel, loginPanel, searchpanel, deletePanel, accountPanel, withdrawPanel, transferPanel, addBalancePanel, showAllPanel;
+    private JTextField tf1, tf2, tf3, tf4, tf5, tf7, searchTf, deleteTf, withdrawTf, transferRecipientTf, transferAmountTf, addBalanceTf, userTf;
+    private JPasswordField pf1, deletePf, passPf;
     private JLabel l1,l2,l3,l4,l5,l6;
+	private JRadioButton savingsRadio, currentRadio;
+	private JTextArea showAllTextArea;
+	
     public Frame1()
     {
         super("ABC Bank Management System");
@@ -108,7 +111,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         createLabel.setBounds(275, 10, 350, 50);
         createPanel.add(createLabel);
         
-        JButton backBtn = new JButton("Create Account");
+        backBtn = new JButton("Create Account");
         backBtn.addActionListener(this);
         backBtn.setBounds(350, 850, 200, 50);
         createPanel.add(backBtn);        
@@ -209,7 +212,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         accountTypeLabel.setBounds(165,580,150,40);
         createPanel.add(accountTypeLabel);
 
-        JRadioButton savingsRadio = new JRadioButton("Savings");
+        savingsRadio = new JRadioButton("Savings");
         savingsRadio.setFont(f2);
         savingsRadio.setForeground(Color.BLACK);
         savingsRadio.setBackground(Color.LIGHT_GRAY);
@@ -217,7 +220,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         savingsRadio.setSelected(true);
         createPanel.add(savingsRadio);
 
-        JRadioButton currentRadio = new JRadioButton("Current");
+        currentRadio = new JRadioButton("Current");
         currentRadio.setFont(f2);
         currentRadio.setForeground(Color.BLACK);
         currentRadio.setBackground(Color.LIGHT_GRAY);
@@ -261,7 +264,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         userLabel.setBounds(200, 150, 150, 40);
         loginPanel.add(userLabel);
 
-        JTextField userTf = new JTextField();
+        userTf = new JTextField();
         userTf.setFont(f2);
         userTf.setBounds(350, 150, 300, 40);
         loginPanel.add(userTf);
@@ -272,7 +275,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         passLabel.setBounds(200, 250, 150, 40);
         loginPanel.add(passLabel);
 
-        JPasswordField passPf = new JPasswordField();
+        passPf = new JPasswordField();
         passPf.setFont(f2);
         passPf.setBounds(350, 250, 300, 40);
         loginPanel.add(passPf);
@@ -535,6 +538,32 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
 
         this.add(addBalancePanel);
 
+        // Show All Panel
+        showAllPanel = new JPanel();
+        showAllPanel.setLayout(null);
+        showAllPanel.setBounds(0,0,900,1250);
+        showAllPanel.setBackground(new Color(20, 30, 48));
+
+        JLabel showAllLabel = new JLabel("All Accounts");
+        showAllLabel.setFont(f2);
+        showAllLabel.setForeground(Color.WHITE);
+        showAllLabel.setBounds(350, 50, 200, 50);
+        showAllPanel.add(showAllLabel);
+
+        showAllTextArea = new JTextArea();
+        showAllTextArea.setFont(f2);
+        showAllTextArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(showAllTextArea);
+        scrollPane.setBounds(50, 120, 800, 1000);
+        showAllPanel.add(scrollPane);
+
+        backFromShowAll = new JButton("Back to Main");
+        backFromShowAll.addActionListener(this);
+        backFromShowAll.setBounds(350, 1130, 200, 50);
+        showAllPanel.add(backFromShowAll);
+
+        this.add(showAllPanel);
+
         mainPanel.setVisible(true);
         createPanel.setVisible(false);
         loginPanel.setVisible(false);
@@ -544,12 +573,13 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         withdrawPanel.setVisible(false);
         transferPanel.setVisible(false);
         addBalancePanel.setVisible(false);
+        showAllPanel.setVisible(false);
 
     }
     
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource() == button1)
+         if(e.getSource() == button1)
         {
             mainPanel.setVisible(false);
             createPanel.setVisible(true);
@@ -560,7 +590,9 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
-             }
+            showAllPanel.setVisible(false);
+			
+		}
         if(e.getSource() == bt2)
         {
            mainPanel.setVisible(false);
@@ -572,20 +604,61 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
            withdrawPanel.setVisible(false);
            transferPanel.setVisible(false);
            addBalancePanel.setVisible(false);
+           showAllPanel.setVisible(false);
         }
-        if(e.getSource() == backBtn)
+        if(e.getSource() == backBtn)                    
         {
-            createPanel.setVisible(false);
-            loginPanel.setVisible(false);
-            mainPanel.setVisible(true);
+			String s1, s2, s3, s4, s5, s6, s7, s8;
+			
+			s1 = tf1.getText().trim();
+			s2 = tf2.getText().trim();
+			s3 = tf3.getText().trim();
+			s4 = tf4.getText().trim();
+			s5 = tf5.getText().trim();
+			s6 = pf1.getText().trim();
+			
+			if(savingsRadio.isSelected())
+			{
+			   s7 = savingsRadio.getText();
+			}
+			
+			else if(currentRadio.isSelected())
+			{
+			   s7 = currentRadio.getText();
+			}
+			
+			else 
+			{
+		      s7 = "Others" ;
+			}
+			
+			s8 = tf7.getText().trim();
+			
+			if(s1.isEmpty() || s2.isEmpty() || s3.isEmpty() || s4.isEmpty() || s5.isEmpty() || s6.isEmpty() || s8.isEmpty())
+			{
+				JOptionPane.showMessageDialog(this,"Please fill up all the information");
+			}
+			
+			else
+			{
+              Account obj1 = new Account(s1, s2, s3, s4, s5, s6, s7, s8);
+				obj1.insertInfo();
+				JOptionPane.showMessageDialog(this,"Thanks for fill up the information");
+				//showInfo();
+			}
+       
             searchpanel.setVisible(false);
             deletePanel.setVisible(false);
             accountPanel.setVisible(false);
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
-            JOptionPane.showMessageDialog(backBtn, "Account Created Successfully!");
-       
+            loginPanel.setVisible(false);
+            createPanel.setVisible(true);
+            mainPanel.setVisible(false);
+            showAllPanel.setVisible(false);
+			
+			
         }
         if(e.getSource() == exitBtn)
         {
@@ -594,6 +667,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             createPanel.setVisible(false);
             searchpanel.setVisible(false);
             deletePanel.setVisible(false);
+            showAllPanel.setVisible(false);
         }
         if(e.getSource() == backToMainFromLogin)
         {
@@ -606,18 +680,54 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
+            showAllPanel.setVisible(false);
+            userTf.setText("");
+            passPf.setText("");
         }
         if(e.getSource() == loginBtn)
         {
-            mainPanel.setVisible(false);
-            loginPanel.setVisible(false);
-            createPanel.setVisible(false);
-            searchpanel.setVisible(false);
-            deletePanel.setVisible(false);
-            accountPanel.setVisible(true);
-            withdrawPanel.setVisible(false);
-            transferPanel.setVisible(false);
-            addBalancePanel.setVisible(false);
+            String username = userTf.getText().trim();
+            String password = new String(passPf.getPassword()).trim();
+            try {
+                File file = new File("data/userdata.txt");
+                if (!file.exists()) {
+                    JOptionPane.showMessageDialog(this, "No accounts found.");
+                    return;
+                }
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                boolean found = false;
+                String currentUsername = "";
+                String currentPassword = "";
+                while ((line = br.readLine()) != null) {
+                    if (line.startsWith("User Name: ")) {
+                        currentUsername = line.substring(11).trim();
+                    } else if (line.startsWith("Password: ")) {
+                        currentPassword = line.substring(10).trim();
+                        if (currentUsername.equals(username) && currentPassword.equals(password)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                br.close();
+                if (found) {
+                    mainPanel.setVisible(false);
+                    loginPanel.setVisible(false);
+                    createPanel.setVisible(false);
+                    searchpanel.setVisible(false);
+                    deletePanel.setVisible(false);
+                    accountPanel.setVisible(true);
+                    withdrawPanel.setVisible(false);
+                    transferPanel.setVisible(false);
+                    addBalancePanel.setVisible(false);
+                    showAllPanel.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Incorrect username or password");
+                }
+            } catch (IOException ioException) {
+                JOptionPane.showMessageDialog(this, "Error reading file.");
+            }
         }
         if(e.getSource() == bt3)
         {
@@ -639,6 +749,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             loginPanel.setVisible(false);
             createPanel.setVisible(false);
             deletePanel.setVisible(false);
+            showAllPanel.setVisible(false);
 
 
         }
@@ -657,7 +768,38 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             accountPanel.setVisible(false);
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
-            addBalancePanel.setVisible(false);
+            addBalancePanel.setVisible(false);            showAllPanel.setVisible(false);        }
+        if(e.getSource() == bt5)
+        {
+            try {
+                File file = new File("data/userdata.txt");
+                if (!file.exists()) {
+                    JOptionPane.showMessageDialog(this, "No accounts found.");
+                    return;
+                }
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = br.readLine()) != null) {
+                    if (!line.startsWith("Password:")) {
+                        sb.append(line).append("\n");
+                    }
+                }
+                br.close();
+                showAllTextArea.setText(sb.toString());
+                mainPanel.setVisible(false);
+                showAllPanel.setVisible(true);
+                createPanel.setVisible(false);
+                loginPanel.setVisible(false);
+                searchpanel.setVisible(false);
+                deletePanel.setVisible(false);
+                accountPanel.setVisible(false);
+                withdrawPanel.setVisible(false);
+                transferPanel.setVisible(false);
+                addBalancePanel.setVisible(false);
+            } catch (IOException ioException) {
+                JOptionPane.showMessageDialog(this, "Error reading file.");
+            }
         }
         if(e.getSource() == backFromDelete)
         {
@@ -669,8 +811,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             accountPanel.setVisible(false);
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
-            addBalancePanel.setVisible(false);
-        }
+            addBalancePanel.setVisible(false);            showAllPanel.setVisible(false);        }
         if(e.getSource() == balanceBtn)
         {
             JOptionPane.showMessageDialog(this, "Current Balance: $1000");
@@ -686,6 +827,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             deletePanel.setVisible(false);
             withdrawPanel.setVisible(false);
             addBalancePanel.setVisible(false);
+            showAllPanel.setVisible(false);
         }
         if(e.getSource() == withdrawBtn)
         {
@@ -698,6 +840,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             deletePanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
+            showAllPanel.setVisible(false);
         }
         if(e.getSource() == addBalanceBtn)
         {
@@ -710,6 +853,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             deletePanel.setVisible(false);
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
+            showAllPanel.setVisible(false);
         }
         if(e.getSource() == logoutBtn)
         {
@@ -722,6 +866,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
+            showAllPanel.setVisible(false);
         }
         if(e.getSource() == bt6)
         {
@@ -754,6 +899,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             deletePanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
+            showAllPanel.setVisible(false);
         }
         if(e.getSource() == backFromTransfer)
         {
@@ -766,6 +912,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             deletePanel.setVisible(false);
             withdrawPanel.setVisible(false);
             addBalancePanel.setVisible(false);
+            showAllPanel.setVisible(false);
         }
         if(e.getSource() == backFromAddBalance)
         {
@@ -778,12 +925,23 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             deletePanel.setVisible(false);
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
+            showAllPanel.setVisible(false);
+        }
+        if(e.getSource() == backFromShowAll)
+        {
+            mainPanel.setVisible(true);
+            showAllPanel.setVisible(false);
+            createPanel.setVisible(false);
+            loginPanel.setVisible(false);
+            searchpanel.setVisible(false);
+            deletePanel.setVisible(false);
+            accountPanel.setVisible(false);
+            withdrawPanel.setVisible(false);
+            transferPanel.setVisible(false);
+            addBalancePanel.setVisible(false);
         }
 
     }
     
-    public static void main(String[] args)
-    {
-        new Frame1();
-    }
+   
 }

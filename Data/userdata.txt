@@ -1,0 +1,10 @@
+========================================
+Name: Joy Paul
+Address: Kawla
+Phone: 01317755803
+Email: joypauljp102@gmail.com
+User Name: JP-102
+Password: 1234
+Account Type: Savings
+Description: test account
+========================================
