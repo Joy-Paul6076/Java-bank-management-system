@@ -1,9 +1,10 @@
-
-//import java.lang.*;
+//Create Account Name Address Savings Description Password // Create Account backFromSearch 
+// loginBtn Log in loginBtn
+import java.lang.*;
 import javax.swing.*; //package for GUI components
 import java.awt.*; //package for Font and Color
 import java.awt.event.*; //package for Interfaces
-//import java.io.*; //for File IO
+import java.io.*; //for File IO
 
 public class Frame1 extends JFrame implements ActionListener // , MouseListener
 {
@@ -12,9 +13,11 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
     private Font f1,f2;
     private Color c1;
     private JPanel mainPanel, createPanel, loginPanel, searchpanel, deletePanel, accountPanel, withdrawPanel, transferPanel, addBalancePanel;
-    private JTextField tf1, tf2, tf3, tf4, tf5, tf7, searchTf, deleteTf, withdrawTf, transferRecipientTf, transferAmountTf, addBalanceTf;
-    private JPasswordField pf1, deletePf;
+    private JTextField tf1, tf2, tf3, tf4, tf5, tf7, userTf ,searchTf, deleteTf, withdrawTf, transferRecipientTf, transferAmountTf, addBalanceTf;
+    private JPasswordField pf1, deletePf, passPf;
     private JLabel l1,l2,l3,l4,l5,l6;
+	private JRadioButton savingsRadio, currentRadio;
+	
     public Frame1()
     {
         super("ABC Bank Management System");
@@ -108,7 +111,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         createLabel.setBounds(275, 10, 350, 50);
         createPanel.add(createLabel);
         
-        JButton backBtn = new JButton("Create Account");
+        backBtn = new JButton("Create Account");
         backBtn.addActionListener(this);
         backBtn.setBounds(350, 850, 200, 50);
         createPanel.add(backBtn);        
@@ -209,7 +212,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         accountTypeLabel.setBounds(165,580,150,40);
         createPanel.add(accountTypeLabel);
 
-        JRadioButton savingsRadio = new JRadioButton("Savings");
+        savingsRadio = new JRadioButton("Savings");
         savingsRadio.setFont(f2);
         savingsRadio.setForeground(Color.BLACK);
         savingsRadio.setBackground(Color.LIGHT_GRAY);
@@ -217,7 +220,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         savingsRadio.setSelected(true);
         createPanel.add(savingsRadio);
 
-        JRadioButton currentRadio = new JRadioButton("Current");
+        currentRadio = new JRadioButton("Current");
         currentRadio.setFont(f2);
         currentRadio.setForeground(Color.BLACK);
         currentRadio.setBackground(Color.LIGHT_GRAY);
@@ -249,7 +252,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         loginPanel.setBounds(0,0,900,1250);
         loginPanel.setBackground(new Color(20, 30, 48));
 
-        JLabel loginLabel = new JLabel("Log In");
+        JLabel loginLabel = new JLabel("Log In");     //**************
         loginLabel.setFont(f2);
         loginLabel.setForeground(Color.WHITE);
         loginLabel.setBounds(350, 50, 200, 50);
@@ -261,7 +264,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         userLabel.setBounds(200, 150, 150, 40);
         loginPanel.add(userLabel);
 
-        JTextField userTf = new JTextField();
+        userTf = new JTextField();
         userTf.setFont(f2);
         userTf.setBounds(350, 150, 300, 40);
         loginPanel.add(userTf);
@@ -272,7 +275,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         passLabel.setBounds(200, 250, 150, 40);
         loginPanel.add(passLabel);
 
-        JPasswordField passPf = new JPasswordField();
+        passPf = new JPasswordField();
         passPf.setFont(f2);
         passPf.setBounds(350, 250, 300, 40);
         loginPanel.add(passPf);
@@ -312,12 +315,12 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
         searchTf.setBounds(350, 150, 300, 40);
         searchpanel.add(searchTf);
 
-        JButton searchBtn = new JButton("Search");
+        searchBtn = new JButton("Search");
         searchBtn.addActionListener(this);
         searchBtn.setBounds(350, 250, 200, 50);
         searchpanel.add(searchBtn);
 
-        JButton backFromSearch = new JButton("Back to Main");
+        backFromSearch = new JButton("Back to Main");
         backFromSearch.addActionListener(this);
         backFromSearch.setBounds(350, 350, 200, 50);
         searchpanel.add(backFromSearch);
@@ -549,7 +552,7 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
     
     public void actionPerformed(ActionEvent e)
     {
-        if(e.getSource() == button1)
+         if(e.getSource() == button1)
         {
             mainPanel.setVisible(false);
             createPanel.setVisible(true);
@@ -560,7 +563,8 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
-             }
+			
+		}
         if(e.getSource() == bt2)
         {
            mainPanel.setVisible(false);
@@ -573,19 +577,58 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
            transferPanel.setVisible(false);
            addBalancePanel.setVisible(false);
         }
-        if(e.getSource() == backBtn)
+        if(e.getSource() == backBtn)                    
         {
-            createPanel.setVisible(false);
-            loginPanel.setVisible(false);
-            mainPanel.setVisible(true);
+			String s1, s2, s3, s4, s5, s6, s7, s8;
+			
+			s1 = tf1.getText().trim();
+			s2 = tf2.getText().trim();
+			s3 = tf3.getText().trim();
+			s4 = tf4.getText().trim();
+			s5 = tf5.getText().trim();
+			s6 =  new String(pf1.getPassword()).trim();
+			
+			if(savingsRadio.isSelected())
+			{
+			   s7 = savingsRadio.getText();
+			}
+			
+			else if(currentRadio.isSelected())
+			{
+			   s7 = currentRadio.getText();
+			}
+			
+			else 
+			{
+		      s7 = "Others" ;
+			}
+			
+			s8 = tf7.getText().trim();
+			
+			if(s1.isEmpty() || s2.isEmpty() || s3.isEmpty() || s4.isEmpty() || s5.isEmpty() || s6.isEmpty() || s8.isEmpty())
+			{
+				JOptionPane.showMessageDialog(this,"Please fill up all the information");
+			}
+			
+			else
+			{
+              Account obj1 = new Account(s1, s2, s3, s4, s5, s6, s7, s8);
+				obj1.insertInfo();
+				JOptionPane.showMessageDialog(this,"Thanks for fill up the information");
+				//showInfo();
+			}
+       
             searchpanel.setVisible(false);
             deletePanel.setVisible(false);
             accountPanel.setVisible(false);
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
-            JOptionPane.showMessageDialog(backBtn, "Account Created Successfully!");
-       
+            loginPanel.setVisible(false);
+            createPanel.setVisible(true);
+            mainPanel.setVisible(false);
+			
+			
         }
         if(e.getSource() == exitBtn)
         {
@@ -607,9 +650,17 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
         }
-        if(e.getSource() == loginBtn)
+        if(e.getSource() == loginBtn)      // **********************
         {
-            mainPanel.setVisible(false);
+			
+			 String username = userTf.getText().trim();
+            String password = new String(passPf.getPassword());
+			 
+			 if(Account.loginCheck(username, password)) 
+			 {
+             JOptionPane.showMessageDialog(this, "Login Successful!");  
+			 
+			 mainPanel.setVisible(false);
             loginPanel.setVisible(false);
             createPanel.setVisible(false);
             searchpanel.setVisible(false);
@@ -618,6 +669,18 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
             withdrawPanel.setVisible(false);
             transferPanel.setVisible(false);
             addBalancePanel.setVisible(false);
+			
+			 
+			 }
+			 
+			 else
+			 {
+				 JOptionPane.showMessageDialog(this, "Login Failed!");
+			 }
+			 
+			
+            
+			
         }
         if(e.getSource() == bt3)
         {
@@ -782,8 +845,5 @@ public class Frame1 extends JFrame implements ActionListener // , MouseListener
 
     }
     
-    public static void main(String[] args)
-    {
-        new Frame1();
-    }
+   
 }
