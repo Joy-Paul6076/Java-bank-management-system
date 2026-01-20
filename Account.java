@@ -20,8 +20,8 @@ public class Account
 			 this.s8 = s8;
 		}
 		
-		public void insertInfo()
-	{
+	    public void insertInfo()
+	   {
 		try 
 		{
 			File dataDir = new File("data");
@@ -43,7 +43,7 @@ public class Account
 			fwriter.write("Address: "+s2+"\n");
 			fwriter.write("Phone: "+s3+"\n");
 			fwriter.write("Email: "+s4+"\n");
-			fwriter.write("User Name: "+s5+"\n");
+			fwriter.write("Username: "+s5+"\n");
 			fwriter.write("Password: "+s6+"\n");
 			fwriter.write("Account Type: "+s7+"\n");
 			fwriter.write("Description: "+s8+"\n");
@@ -57,6 +57,59 @@ public class Account
 			ioe.printStackTrace();
 			JOptionPane.showMessageDialog(null,"Error occcurs");
 		}
-	}
+	   }
+	   
+	   public  static boolean loginCheck(String username, String password)
+	   {
+		   File file = new File("data/userdata.txt");
+			
+			if(!file.exists())
+			{
+				 JOptionPane.showMessageDialog(null, "No users found. Please create an account first.");
+				 return false;
+			}
+			
+		   try
+		   {
+			BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            String fileUsername = "";
+            String filePassword = "";
+			
+			while((line = br.readLine()) != null)
+			{
+				if (line.startsWith("Username: ")) 
+				{
+                    fileUsername = line.substring(10).trim();
+                }
+                if (line.startsWith("Password: ")) 
+				{
+                    filePassword = line.substring(10).trim();
+                }
+				
+				if(!fileUsername.isEmpty() && !filePassword.isEmpty())
+				{
+					if(fileUsername.equals(username) && filePassword.equals(password))
+					{
+						br.close();
+						return true;
+					}
+					
+					fileUsername = "";
+                    filePassword = "";
+					
+			   }
+		   
+            }
+		   br.close();	
+		}
+      		
+	   catch (IOException e) 
+		{
+            e.printStackTrace();
+        }
+
+            return false;
+    }
 }
 	
