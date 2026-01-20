@@ -8,3 +8,13 @@ Password: 1234
 Account Type: Savings
 Description: test account
 ========================================
+========================================
+Name: Opu roy
+Address: kuril
+Phone: 01777377299
+Email: opuroy@gmail.com
+User Name: opuroy
+Password: 1234
+Account Type: Savings
+Description: my name is opu roy
+========================================
