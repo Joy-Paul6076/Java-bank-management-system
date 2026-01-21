@@ -1,11 +1,10 @@
 package Frame;
 
-import Picture.*;
-import javax.swing.*; //package for GUI components
-import java.awt.*; //package for Font and Color
-import java.awt.event.*; //package for Interfaces
-import java.io.*; //for File IO
-import Entity.Account; //import Account class from Entity package
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import Entity.Account;
 public class Frame1 extends JFrame implements ActionListener
 {
     private JLabel label1;
@@ -265,7 +264,7 @@ public class Frame1 extends JFrame implements ActionListener
         createPanel.add(tf7);
 
         
-        // LOGIN PANEL SETUP - User authentication screen
+        // LOGIN PANEL SETUP
         loginPanel = new JPanel();
         loginPanel.setLayout(null);
         loginPanel.setBounds(0,0,900,1250);
@@ -894,21 +893,36 @@ public class Frame1 extends JFrame implements ActionListener
             showAllPanel.setVisible(false);        
         }
         // bt5 - Show All Accounts Panel
-        if(e.getSource() == bt5)
+    if(e.getSource() == bt5)
+
         {
+
             try {
+
                 File file = new File("Data/userdata.txt");
+
                 if (!file.exists()) {
+
                     JOptionPane.showMessageDialog(this, "No accounts found.");
+
                     return;
+
                 }
+
                 BufferedReader br = new BufferedReader(new FileReader(file));
+
                 String line;
+
                 StringBuilder sb = new StringBuilder();
+
                 while ((line = br.readLine()) != null) {
+
                     if (!line.startsWith("Password:")) {
+
                         sb.append(line).append("\n");
+
                     }
+
                 }
                 br.close();
                 showAllTextArea.setText(sb.toString());
