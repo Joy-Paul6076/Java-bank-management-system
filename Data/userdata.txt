@@ -19,4 +19,13 @@ User Name: zarin
 Password: 1234
 Account Type: Savings
 Description: brainless
+================================================================================
+Name: zarin zorina
+Address: basundhara
+Phone: 01976387298
+Email: zorina@gmail.com
+User Name: zorin
+Password: 1234
+Account Type: Current
+Description: brainless
 ========================================

@@ -1,5 +1,6 @@
 package Frame;
 
+import Picture.*;
 import javax.swing.*; //package for GUI components
 import java.awt.*; //package for Font and Color
 import java.awt.event.*; //package for Interfaces
@@ -20,7 +21,7 @@ public class Frame1 extends JFrame implements ActionListener
 	private String loggedInUsername = null;
 	private double userBalance = 0.0;
 	private JTextArea searchResultTextArea;
-	
+	private ImageIcon image1;
     public Frame1()
     {
         // main frame setup
@@ -41,8 +42,8 @@ public class Frame1 extends JFrame implements ActionListener
         mainPanel.setLayout(null);                     
         mainPanel.setBounds(0,0,900,1250);             // Full window size
         mainPanel.setBackground(new Color(20, 30, 48)); // Dark blue background
-        ImageIcon image1 = new ImageIcon("logo.png");   // Load application logo
-        this.setIconImage(image1.getImage());           // Set icon
+        image1 = new ImageIcon("Picture/logo.png");   // Load application logo
+        super.setIconImage(image1.getImage());           // Set icon
 
         // Welcome label for main panel
         label1 = new JLabel("Welcome to ABC Bank Management System");
@@ -765,7 +766,7 @@ public class Frame1 extends JFrame implements ActionListener
                 boolean found = false;
                 String currentUsername = "";
                 String currentPassword = "";
-                double currentBalance = 0.0;
+                double currentBalance = 500.0;
                 while ((line = br.readLine()) != null) {
                     if (line.startsWith("User Name: ")) {
                         currentUsername = line.substring(11).trim();
