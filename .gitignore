@@ -1,5 +1,40 @@
+
+# Compiled class files
 *.class
-*.jar 
-/vscode/
+
+# Logs
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Build directories
+target/
+build/
+out/
+
+# IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# User data (do not track local user data)
+Data/userdata.txt
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Misc
+*.class
 
 

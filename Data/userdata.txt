@@ -4,17 +4,19 @@ Address: Kawla
 Phone: 01317755803
 Email: joypauljp102@gmail.com
 User Name: JP-102
-Password: 1234
-Account Type: Savings
-Description: test account
-========================================
 ========================================
 Name: Opu roy
 Address: kuril
 Phone: 01777377299
 Email: opuroy@gmail.com
 User Name: opuroy
+========================================
+Name: Zarin Akter Zoha
+Address: Bashundhara R/A
+Phone: 01934813044
+Email: zarinzoha@gmail.com
+User Name: zarin
 Password: 1234
 Account Type: Savings
-Description: my name is opu roy
+Description: brainless
 ========================================

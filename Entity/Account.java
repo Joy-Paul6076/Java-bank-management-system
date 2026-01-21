@@ -6,6 +6,7 @@ import javax.swing.*;
 public class Account
 {
         private String s1, s2, s3, s4, s5, s6, s7, s8;
+		private double balance;
 		private File file;
 	    private FileWriter fwriter;
 		
@@ -20,19 +21,33 @@ public class Account
 			 this.s6 = s6;
 			 this.s7 = s7;
 			 this.s8 = s8;
+			 this.balance = 0.0;
+		}
+		
+		public Account(String s1, String s2, String s3, String s4, String s5, String s6, String s7, String s8, double balance)
+		{
+		     this.s1 = s1;
+			 this.s2 = s2;
+			 this.s3 = s3;
+			 this.s4 = s4;
+			 this.s5 = s5;
+			 this.s6 = s6;
+			 this.s7 = s7;
+			 this.s8 = s8;
+			 this.balance = balance;
 		}
 		
 		public void insertInfo()
 	{
 		try 
 		{
-			File dataDir = new File("data");
+			File dataDir = new File("Data");
 			if(!dataDir.exists())
 			{
 				dataDir.mkdirs();
 			}
 			
-			file = new File("data/userdata.txt");
+			file = new File("Data/userdata.txt");
 			
 			if(!file.exists())
 			{
@@ -58,6 +73,43 @@ public class Account
 		{
 			ioe.printStackTrace();
 			JOptionPane.showMessageDialog(null,"Error occcurs");
+		}
+	}
+	
+	// Method to deposit balance
+	public boolean deposit(double amount)
+	{
+		if(amount > 0)
+		{
+			this.balance += amount;
+			return true;
+		}
+		return false;
+	}
+	
+	// Method to withdraw balance
+	public boolean withdraw(double amount)
+	{
+		if(amount > 0 && amount <= this.balance)
+		{
+			this.balance -= amount;
+			return true;
+		}
+		return false;
+	}
+	
+	// Method to get current balance
+	public double getBalance()
+	{
+		return this.balance;
+	}
+	
+	// Method to set balance
+	public void setBalance(double balance)
+	{
+		if(balance >= 0)
+		{
+			this.balance = balance;
 		}
 	}
 }
