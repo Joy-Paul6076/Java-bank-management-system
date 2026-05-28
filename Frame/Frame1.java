@@ -9,8 +9,8 @@ public class Frame1 extends JFrame implements ActionListener
 {
     private JLabel label1;
     private JButton button1, bt2, bt3, bt4, bt5, bt6, backBtn, backToMainFromLogin, exitBtn, backFromSearch, searchBtn, deleteBtn, backFromDelete, balanceBtn, transferBtn, withdrawBtn, addBalanceBtn, logoutBtn, loginBtn, withdrawConfirmBtn, transferConfirmBtn, addBalanceConfirmBtn, backFromWithdraw, backFromTransfer, backFromAddBalance, backFromShowAll;
-    private Font f1,f2;
-    private Color c1;
+    private Font f1,f2,f3,f4;
+    private Color c1,c2;
     private JPanel mainPanel, createPanel, loginPanel, searchpanel, deletePanel, accountPanel, withdrawPanel, transferPanel, addBalancePanel, showAllPanel;
     private JTextField tf1, tf2, tf3, tf4, tf5, tf7, searchTf, deleteTf, withdrawTf, transferRecipientTf, transferAmountTf, addBalanceTf, userTf;
     private JPasswordField pf1, deletePf, passPf;
@@ -34,8 +34,12 @@ public class Frame1 extends JFrame implements ActionListener
         // FONT AND COLOR SETUP
         f1 = new Font("Arial", Font.BOLD, 48);         //font for main buttons
 		f2 = new Font("Arial", Font.BOLD, 24);         //font for labels and inputs
+        f3 = new Font("Arial", Font.BOLD, 36);        //font for the show-all button
+        f4 = new Font("Monospaced", Font.PLAIN, 16);  //font for the show-all text area
         c1 = new Color(255, 193, 7);                   //color for buttons
-        
+        c2 = new Color(20, 30, 48);                    //color for panels
+
+
         // MAIN PANEL SETUP
         mainPanel = new JPanel();
         mainPanel.setLayout(null);                     
@@ -48,7 +52,7 @@ public class Frame1 extends JFrame implements ActionListener
         label1 = new JLabel("Welcome to ABC Bank Management System");
         label1.setFont(f2);                            
         label1.setForeground(Color.WHITE);             
-        label1.setBounds(180, 15, 500, 30);           
+        label1.setBounds(150, 15, 600, 30);           
         label1.setHorizontalAlignment(JLabel.CENTER);  // Center align text
         label1.setVerticalAlignment(JLabel.TOP);       // Align to top
         mainPanel.add(label1);                         // Add to main panel
@@ -89,7 +93,7 @@ public class Frame1 extends JFrame implements ActionListener
         bt5 = new JButton("SHOW ALL ACCOUNTS");
         bt5.addActionListener(this);
         bt5.setBounds(200,850,500,100);
-        bt5.setFont(f1);
+        bt5.setFont(f3);
         bt5.setBackground(c1);
         mainPanel.add(bt5);
 
@@ -268,7 +272,7 @@ public class Frame1 extends JFrame implements ActionListener
         loginPanel = new JPanel();
         loginPanel.setLayout(null);
         loginPanel.setBounds(0,0,900,1250);
-        loginPanel.setBackground(new Color(20, 30, 48));
+        loginPanel.setBackground(c2);
 
         // Panel title
         JLabel loginLabel = new JLabel("Log In");
@@ -319,7 +323,7 @@ public class Frame1 extends JFrame implements ActionListener
         searchpanel = new JPanel();
         searchpanel.setLayout(null);
         searchpanel.setBounds(0,0,900,1250);
-        searchpanel.setBackground(new Color(20, 30, 48));
+        searchpanel.setBackground(c2);
 
         // Panel title
         JLabel searchLabel = new JLabel("Search Account");
@@ -365,7 +369,7 @@ public class Frame1 extends JFrame implements ActionListener
         deletePanel = new JPanel();
         deletePanel.setLayout(null);
         deletePanel.setBounds(0,0,900,1250);
-        deletePanel.setBackground(new Color(20, 30, 48));
+        deletePanel.setBackground(c2);
 
         // Panel title
         JLabel deleteLabel = new JLabel("Delete Account");
@@ -416,7 +420,7 @@ public class Frame1 extends JFrame implements ActionListener
         accountPanel = new JPanel();
         accountPanel.setLayout(null);
         accountPanel.setBounds(0,0,900,1250);
-        accountPanel.setBackground(new Color(20, 30, 48));
+        accountPanel.setBackground(c2);
 
         // Panel title
         JLabel accountLabel = new JLabel("Account Options");
@@ -472,7 +476,7 @@ public class Frame1 extends JFrame implements ActionListener
         withdrawPanel = new JPanel();
         withdrawPanel.setLayout(null);
         withdrawPanel.setBounds(0,0,900,1250);
-        withdrawPanel.setBackground(new Color(20, 30, 48));
+        withdrawPanel.setBackground(c2);
 
         // Panel title
         JLabel withdrawLabel = new JLabel("Withdraw Money");
@@ -508,7 +512,7 @@ public class Frame1 extends JFrame implements ActionListener
         transferPanel = new JPanel();
         transferPanel.setLayout(null);
         transferPanel.setBounds(0,0,900,1250);
-        transferPanel.setBackground(new Color(20, 30, 48));
+        transferPanel.setBackground(c2);
 
         JLabel transferLabel = new JLabel("Transfer Money");
         transferLabel.setFont(f2);
@@ -554,7 +558,7 @@ public class Frame1 extends JFrame implements ActionListener
         addBalancePanel = new JPanel();
         addBalancePanel.setLayout(null);
         addBalancePanel.setBounds(0,0,900,1250);
-        addBalancePanel.setBackground(new Color(20, 30, 48));
+        addBalancePanel.setBackground(c2);
 
         JLabel addBalanceLabel = new JLabel("Add Balance");
         addBalanceLabel.setFont(f2);
@@ -592,7 +596,7 @@ public class Frame1 extends JFrame implements ActionListener
         showAllPanel = new JPanel();
         showAllPanel.setLayout(null);
         showAllPanel.setBounds(0,0,900,1250);
-        showAllPanel.setBackground(new Color(20, 30, 48));
+        showAllPanel.setBackground(c2);
 
         // Panel title
         JLabel showAllLabel = new JLabel("All Accounts");
@@ -603,10 +607,16 @@ public class Frame1 extends JFrame implements ActionListener
 
         // Account display area with scroll pane
         showAllTextArea = new JTextArea();             // Displays all account information
-        showAllTextArea.setFont(f2);
+        showAllTextArea.setFont(f4);
         showAllTextArea.setEditable(false);            // Read-only display
+        showAllTextArea.setForeground(Color.WHITE);    // White text on dark background
+        showAllTextArea.setBackground(c2);
+        showAllTextArea.setLineWrap(true);
+        showAllTextArea.setWrapStyleWord(true);
         JScrollPane scrollPane = new JScrollPane(showAllTextArea);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setBounds(50, 120, 800, 1000);
+        showAllTextArea.setMargin(new Insets(8,8,8,8));
         showAllPanel.add(scrollPane);
 
         // BACK TO MAIN button
@@ -631,7 +641,56 @@ public class Frame1 extends JFrame implements ActionListener
         addBalancePanel.setVisible(false);
         showAllPanel.setVisible(false);
 
+        // Attach mouse listeners to buttons for hover/click affordance
+        attachMouseListener(button1);
+        attachMouseListener(bt2);
+        attachMouseListener(bt3);
+        attachMouseListener(bt4);
+        attachMouseListener(bt5);
+        attachMouseListener(bt6);
+        attachMouseListener(backBtn);
+        attachMouseListener(backToMainFromLogin);
+        attachMouseListener(exitBtn);
+        attachMouseListener(backFromSearch);
+        attachMouseListener(searchBtn);
+        attachMouseListener(deleteBtn);
+        attachMouseListener(backFromDelete);
+        attachMouseListener(balanceBtn);
+        attachMouseListener(transferBtn);
+        attachMouseListener(withdrawBtn);
+        attachMouseListener(addBalanceBtn);
+        attachMouseListener(logoutBtn);
+        attachMouseListener(loginBtn);
+        attachMouseListener(withdrawConfirmBtn);
+        attachMouseListener(transferConfirmBtn);
+        attachMouseListener(addBalanceConfirmBtn);
+        attachMouseListener(backFromWithdraw);
+        attachMouseListener(backFromTransfer);
+        attachMouseListener(backFromAddBalance);
+        attachMouseListener(backFromShowAll);
+
     }
+
+    // Helper to add simple mouse hover effects to buttons
+    private void attachMouseListener(final JButton b) {
+        if (b == null) return;
+        final Color orig = b.getBackground();
+        b.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                try {
+                    b.setBackground(orig.darker());
+                } catch (Exception ex) {
+                }
+            }
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                b.setBackground(orig);
+                b.setCursor(Cursor.getDefaultCursor());
+            }
+        });
+    }
+
+    
     
     
     public void actionPerformed(ActionEvent e)
@@ -926,6 +985,7 @@ public class Frame1 extends JFrame implements ActionListener
                 }
                 br.close();
                 showAllTextArea.setText(sb.toString());
+                showAllTextArea.setCaretPosition(0); // Ensure view starts at top
                 mainPanel.setVisible(false);
                 showAllPanel.setVisible(true);
                 createPanel.setVisible(false);
